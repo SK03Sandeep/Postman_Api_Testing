@@ -1,0 +1,39 @@
+{
+  "employee": [
+    {
+      "name": "hardik",
+      "company": "verizon",
+      "salary": 2000020,
+      "previouscompanies": [
+        "apple",
+        "google",
+        "microsoft"
+      ],
+      "id": "5"
+    },
+    {
+      "name": "virat kohli",
+      "id": "3",
+      "company": "apple",
+      "salary": "1000000000000000000"
+    },
+    {
+      "id": "cd33",
+      "name": "rohit sharma",
+      "company": "google",
+      "salary": "102020"
+    },
+    {
+      "id": "de0b",
+      "name": "shubhman gill",
+      "company": "factset",
+      "salary": "102020"
+    },
+    {
+      "id": "d609",
+      "name": "hardil",
+      "company": "factset",
+      "salary": 2000020
+    }
+  ]
+}

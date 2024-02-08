@@ -1,0 +1,295 @@
+{
+	"info": {
+		"_postman_id": "6d28df44-399d-4880-ab3a-e203c88b3129",
+		"name": "Custom_Employee_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32322704"
+	},
+	"item": [
+		{
+			"name": "Request-Get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate response time\",function(){\r",
+							"pm.expect(pm.response.responseTime).to.below(50);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request-Get_SingleUser_Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"checking status code 200\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"checking status text OK\",()=>{\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"checking header content-type\",()=>{\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"checking header content-type value\",()=>{\r",
+							"   pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\")\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.set(\"id\",\"cd33\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/employee/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employee",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_ResponseBody_Validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const data1=pm.response.json(); \r",
+							"pm.test(\"validating data types of response body\",()=>{\r",
+							"pm.expect(data1).to.be.an(\"object\");\r",
+							"pm.expect(data1.id).to.be.an(\"string\");\r",
+							"pm.expect(data1.salary).to.be.an(\"number\");\r",
+							"pm.expect(data1.previouscompanies).to.be.an(\"array\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"validating array properties\",()=>{\r",
+							"pm.expect(data1.previouscompanies).to.include(\"apple\");\r",
+							"//pm.expect(data1.previouscompanies).to.has.members([\"apple\",\"google\"]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"validating values of keys\",function(){\r",
+							"    pm.expect(data1.name).to.eql(\"hardik\");\r",
+							"    pm.expect(data1.company).to.eql(\"verizon\");\r",
+							"    pm.expect(data1.id).to.eql(\"5\");\r",
+							"    \r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/employee/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employee",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request-Get_SingleUser_Invalid_Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"checking status code 404\",function(){\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"checking status test \"Not Found\",()=>{\r",
+							"    pm.response.to.have.status(\"Not Found\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/employee/360b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employee",
+						"360b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request-Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"hardik\",\r\n    \"company\":\"verizon\",\r\n    \"salary\":2000020\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request-Put",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"hardik\",\r\n    \"company\":\"verizon\",\r\n    \"salary\":2000020,\r\n    \"previouscompanies\":[\"apple\",\"google\",\"microsoft\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/employee/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employee",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request-Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/employee/360b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employee",
+						"360b"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "customAPi_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
